@@ -13,12 +13,14 @@ fun main() {
     val bufferSize = 4096
 
     val model = Model(modelPath)
-    val recognizer = Recognizer (model, sampleRate)
 
     val commands = mapOf(
         "open google chrome" to "google-chrome",
         "start containers" to "synchro-utils dfe start-containers"
     )
+
+    val grammar = "{ \"grammar\" : [ \"${commands.keys.joinToString("\", \"")}\" ] }"
+    val recognizer = Recognizer (model, sampleRate, grammar)
 
     val format = AudioFormat(sampleRate, 16, 1, true, false)
     val micInfo = AudioSystem.getTargetDataLine(format)
