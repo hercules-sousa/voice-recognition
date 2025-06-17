@@ -1,4 +1,4 @@
-package org.example.command.impl
+package org.example
 
 import command.impl.BraveExecutor
 import command.impl.ChromeExecutor

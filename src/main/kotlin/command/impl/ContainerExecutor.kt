@@ -1,7 +1,7 @@
 package command.impl
 
 import command.CommandExecutor
-import org.example.command.impl.runCommand
+import org.example.runCommand
 
 class ContainerExecutor(private val action: String) : CommandExecutor {
     override fun execute(command: String) {
