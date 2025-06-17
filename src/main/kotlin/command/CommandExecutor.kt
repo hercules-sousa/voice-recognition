@@ -1,4 +1,4 @@
-package org.example.command
+package command
 
 interface CommandExecutor {
     fun execute(command: String)

@@ -1,9 +1,10 @@
-package org.example.command.impl
+package command.impl
 
-import org.example.command.CommandExecutor
+import command.CommandExecutor
+import org.example.command.impl.runCommand
 
 class EchoExecutor : CommandExecutor {
     override fun execute(command: String) {
-        runCommand("sh -c 'echo \$PATH'")
+        runCommand("echo \$PATH")
     }
 }

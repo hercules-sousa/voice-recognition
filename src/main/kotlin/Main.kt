@@ -1,6 +1,10 @@
 package org.example.command.impl
 
-import org.example.command.CommandExecutor
+import command.impl.BraveExecutor
+import command.impl.ChromeExecutor
+import command.impl.ContainerExecutor
+import command.impl.EchoExecutor
+import command.CommandExecutor
 import org.vosk.Model
 import org.vosk.Recognizer
 import javax.sound.sampled.AudioFormat
@@ -13,9 +17,21 @@ object VoiceAssistantConfig {
 
 fun runCommand(command: String) {
     try {
-        val process = Runtime.getRuntime().exec(arrayOf("zsh", "-c", command))
+        val process = Runtime.getRuntime().exec(arrayOf("zsh", "-c", "source ~/.zshrc && $command"))
+        process.waitFor()
+
+        val output = process.inputStream.bufferedReader().readText()
+        val errorOutput = process.errorStream.bufferedReader().readText()
+
+        if (output.isNotBlank()) {
+            println("📤 Output:\n$output")
+        }
+
+        if (errorOutput.isNotBlank()) {
+            println("❌ Error:\n$errorOutput")
+        }
     } catch (e: Exception) {
-        println("Error running command: ${e.message}")
+        println("🚨 Exception: ${e.message}")
         e.printStackTrace()
     }
 }
@@ -24,12 +40,17 @@ class CommandMapper {
     val commandMap: Map<String, CommandExecutor> = mapOf(
         "open chrome" to ChromeExecutor(),
         "the open chrome" to ChromeExecutor(),
+
         "echo" to EchoExecutor(),
         "the echo" to EchoExecutor(),
+        "the best" to EchoExecutor(),
+        "best" to EchoExecutor(),
+
         "start containers" to ContainerExecutor("start"),
         "the start containers" to ContainerExecutor("start"),
         "stop containers" to ContainerExecutor("stop"),
         "the stop containers" to ContainerExecutor("stop"),
+
         "brave" to BraveExecutor("https://www.youtube.com/"),
         "the brave" to BraveExecutor("https://www.youtube.com/"),
         "soul of christ" to BraveExecutor("https://www.youtube.com/watch?v=QAUo2mG8e3g"),

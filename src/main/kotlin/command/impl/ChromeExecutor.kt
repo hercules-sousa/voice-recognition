@@ -1,6 +1,7 @@
-package org.example.command.impl
+package command.impl
 
-import org.example.command.CommandExecutor
+import command.CommandExecutor
+import org.example.command.impl.runCommand
 
 class ChromeExecutor : CommandExecutor {
     override fun execute(command: String) {
