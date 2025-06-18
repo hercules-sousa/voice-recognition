@@ -20,10 +20,6 @@ Um assistente virtual controlado por voz, desenvolvido em Kotlin e utilizando a 
 - zsh/bash para execução de comandos
 - Linux Desktop Entry (`.desktop`) para integração com o sistema
 
-## 📷 Screenshot (opcional)
-
-> *(Adicione uma imagem ou gif da interface de voz ou da execução de comandos por voz)*
-
 ## ⚙️ Instalação
 
 ### 1. Pré-requisitos
